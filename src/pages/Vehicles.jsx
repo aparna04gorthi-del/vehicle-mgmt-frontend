@@ -7,7 +7,8 @@ export default function Vehicles() {
   const [vehicles, setVehicles] = useState([]);
   const [form, setForm] = useState({
     registration_no: '', vehicle_type: '', make: '',
-    model: '', year: '', status: '', assigned_site: ''
+    model: '', year: '', status: '', assigned_site: '',
+    rc_no: '', rc_expiry: ''
   });
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +23,7 @@ export default function Vehicles() {
     if (!form.registration_no) return;
     setLoading(true);
     await axios.post(`${API}/vehicles/`, form);
-    setForm({ registration_no: '', vehicle_type: '', make: '', model: '', year: '', status: '', assigned_site: '' });
+    setForm({ registration_no: '', vehicle_type: '', make: '', model: '', year: '', status: '', assigned_site: '', rc_no: '', rc_expiry: '' });
     await fetchVehicles();
     setLoading(false);
   };
@@ -40,6 +41,8 @@ export default function Vehicles() {
     { key: 'year', label: 'Year' },
     { key: 'status', label: 'Status' },
     { key: 'assigned_site', label: 'Assigned Site' },
+    { key: 'rc_no', label: 'RC Number' },
+    { key: 'rc_expiry', label: 'RC Expiry (YYYY-MM-DD)' },
   ];
 
   return (
@@ -69,14 +72,14 @@ export default function Vehicles() {
         <table>
           <thead>
             <tr>
-              {['Reg No', 'Type', 'Make', 'Model', 'Year', 'Status', 'Site', ''].map(h => (
+              {['Reg No', 'Type', 'Make', 'Model', 'Year', 'Status', 'Site', 'RC No', 'RC Expiry', ''].map(h => (
                 <th key={h}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {vehicles.length === 0 ? (
-              <tr><td colSpan={8} style={{ textAlign: 'center', padding: '40px', color: '#48484E' }}>No vehicles registered yet.</td></tr>
+              <tr><td colSpan={10} style={{ textAlign: 'center', padding: '40px', color: '#48484E' }}>No vehicles registered yet.</td></tr>
             ) : vehicles.map(v => (
               <tr key={v.vehicle_id}>
                 <td><span className="mono">{v.registration_no}</span></td>
@@ -92,6 +95,8 @@ export default function Vehicles() {
                   }}>{v.status || '—'}</span>
                 </td>
                 <td>{v.assigned_site}</td>
+                <td><span className="mono">{v.rc_no || '—'}</span></td>
+                <td><span className="mono">{v.rc_expiry || '—'}</span></td>
                 <td><button className="btn-danger" onClick={() => handleDelete(v.vehicle_id)}>Remove</button></td>
               </tr>
             ))}
