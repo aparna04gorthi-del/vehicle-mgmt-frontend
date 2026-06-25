@@ -11,8 +11,12 @@ export default function Fuel() {
   });
   const [loading, setLoading] = useState(false);
 
+  const getHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  });
+
   const fetchEntries = async () => {
-    const res = await axios.get(`${API}/fuel/`);
+    const res = await axios.get(`${API}/fuel/`, getHeaders());
     setEntries(res.data);
   };
 
@@ -21,14 +25,14 @@ export default function Fuel() {
   const handleSubmit = async () => {
     if (!form.fuel_station) return;
     setLoading(true);
-    await axios.post(`${API}/fuel/`, form);
+    await axios.post(`${API}/fuel/`, form, getHeaders());
     setForm({ vehicle_id: '', fuel_date: '', litres: '', cost: '', fuel_station: '', payment_mode: '' });
     await fetchEntries();
     setLoading(false);
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API}/fuel/${id}`);
+    await axios.delete(`${API}/fuel/${id}`, getHeaders());
     fetchEntries();
   };
 

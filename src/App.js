@@ -10,6 +10,8 @@ import Fuel from './pages/Fuel';
 import Maintenance from './pages/Maintenance';
 import Compliance from './pages/Compliance';
 import Users from './pages/Users';
+import BulkImport from './pages/BulkImport';
+import AccessMatrix from './pages/AccessMatrix';
 
 const navItems = [
   { path: '/', label: 'Dashboard', icon: '📊', roles: ['admin', 'fleet_manager', 'site_manager', 'accounts', 'driver'] },
@@ -19,6 +21,8 @@ const navItems = [
   { path: '/fuel', label: 'Fuel', icon: '⛽', roles: ['admin', 'fleet_manager', 'accounts'] },
   { path: '/maintenance', label: 'Maintenance', icon: '🔧', roles: ['admin', 'fleet_manager', 'accounts'] },
   { path: '/compliance', label: 'Compliance', icon: '📋', roles: ['admin', 'fleet_manager'] },
+  { path: '/import', label: 'Bulk Import', icon: '📥', roles: ['admin', 'fleet_manager'] },
+  { path: '/access', label: 'Access Matrix', icon: '🔐', roles: ['admin'] },
   { path: '/users', label: 'Users', icon: '⚙️', roles: ['admin'] },
 ];
 
@@ -34,7 +38,7 @@ function Sidebar({ user, onLogout }) {
     }}>
       <div style={{ padding: '28px 20px 20px', borderBottom: '1px solid #2A2A38' }}>
         <div style={{ fontSize: '10px', letterSpacing: '0.12em', color: '#48484E', marginBottom: '6px', fontWeight: 600, textTransform: 'uppercase' }}>Fleet Control</div>
-        <div style={{ fontSize: '17px', fontWeight: 700, color: '#F2F2F7', letterSpacing: '-0.02em' }}>VehicleMS</div>
+        <div style={{ fontSize: '17px', fontWeight: 700, color: '#F2F2F7', letterSpacing: '-0.02em' }}>FleetMS</div>
       </div>
 
       <div style={{ padding: '16px 20px', borderBottom: '1px solid #2A2A38' }}>
@@ -46,7 +50,7 @@ function Sidebar({ user, onLogout }) {
         }}>{user.role}</div>
       </div>
 
-      <nav style={{ padding: '12px 10px', flex: 1 }}>
+      <nav style={{ padding: '12px 10px', flex: 1, overflowY: 'auto' }}>
         <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '0.1em', color: '#48484E', textTransform: 'uppercase', padding: '8px 14px 6px' }}>Modules</div>
         {filteredNav.map(item => {
           const active = location.pathname === item.path;
@@ -109,6 +113,8 @@ function App() {
             <Route path="/fuel" element={<Fuel />} />
             <Route path="/maintenance" element={<Maintenance />} />
             <Route path="/compliance" element={<Compliance />} />
+            <Route path="/import" element={<BulkImport />} />
+            <Route path="/access" element={<AccessMatrix />} />
             <Route path="/users" element={<Users />} />
           </Routes>
         </div>

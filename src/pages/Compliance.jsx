@@ -21,8 +21,12 @@ export default function Compliance() {
   });
   const [loading, setLoading] = useState(false);
 
+  const getHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  });
+
   const fetchRecords = async () => {
-    const res = await axios.get(`${API}/compliance/`);
+    const res = await axios.get(`${API}/compliance/`, getHeaders());
     setRecords(res.data);
   };
 
@@ -31,14 +35,14 @@ export default function Compliance() {
   const handleSubmit = async () => {
     if (!form.vehicle_id) return;
     setLoading(true);
-    await axios.post(`${API}/compliance/`, form);
+    await axios.post(`${API}/compliance/`, form, getHeaders());
     setForm({ vehicle_id: '', insurance_expiry: '', fitness_expiry: '', pollution_expiry: '', permit_expiry: '', remarks: '' });
     await fetchRecords();
     setLoading(false);
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API}/compliance/${id}`);
+    await axios.delete(`${API}/compliance/${id}`, getHeaders());
     fetchRecords();
   };
 

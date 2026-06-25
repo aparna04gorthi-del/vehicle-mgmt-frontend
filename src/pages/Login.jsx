@@ -39,7 +39,7 @@ export default function Login({ onLogin }) {
       }}>
         <div style={{ marginBottom: '32px' }}>
           <div style={{ fontSize: '10px', letterSpacing: '0.12em', color: '#48484E', marginBottom: '8px', fontWeight: 600, textTransform: 'uppercase' }}>Fleet Control</div>
-          <div style={{ fontSize: '22px', fontWeight: 700, color: '#F2F2F7', letterSpacing: '-0.02em' }}>Sign in to VehicleMS</div>
+          <div style={{ fontSize: '22px', fontWeight: 700, color: '#F2F2F7', letterSpacing: '-0.02em' }}>Sign in to FleetMS</div>
           <div style={{ fontSize: '13px', color: '#48484E', marginTop: '6px' }}>Enter your credentials to continue</div>
         </div>
 

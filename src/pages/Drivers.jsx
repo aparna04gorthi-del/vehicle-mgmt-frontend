@@ -11,8 +11,12 @@ export default function Drivers() {
   });
   const [loading, setLoading] = useState(false);
 
+  const getHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  });
+
   const fetchDrivers = async () => {
-    const res = await axios.get(`${API}/drivers/`);
+    const res = await axios.get(`${API}/drivers/`, getHeaders());
     setDrivers(res.data);
   };
 
@@ -21,14 +25,14 @@ export default function Drivers() {
   const handleSubmit = async () => {
     if (!form.name) return;
     setLoading(true);
-    await axios.post(`${API}/drivers/`, form);
+    await axios.post(`${API}/drivers/`, form, getHeaders());
     setForm({ name: '', phone: '', license_no: '', license_expiry: '', address: '', status: '' });
     await fetchDrivers();
     setLoading(false);
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API}/drivers/${id}`);
+    await axios.delete(`${API}/drivers/${id}`, getHeaders());
     fetchDrivers();
   };
 

@@ -11,8 +11,12 @@ export default function Trips() {
   });
   const [loading, setLoading] = useState(false);
 
+  const getHeaders = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+  });
+
   const fetchTrips = async () => {
-    const res = await axios.get(`${API}/trips/`);
+    const res = await axios.get(`${API}/trips/`, getHeaders());
     setTrips(res.data);
   };
 
@@ -21,14 +25,14 @@ export default function Trips() {
   const handleSubmit = async () => {
     if (!form.start_location) return;
     setLoading(true);
-    await axios.post(`${API}/trips/`, form);
+    await axios.post(`${API}/trips/`, form, getHeaders());
     setForm({ vehicle_id: '', driver_id: '', start_location: '', end_location: '', start_km: '', end_km: '', trip_date: '', status: '' });
     await fetchTrips();
     setLoading(false);
   };
 
   const handleDelete = async (id) => {
-    await axios.delete(`${API}/trips/${id}`);
+    await axios.delete(`${API}/trips/${id}`, getHeaders());
     fetchTrips();
   };
 
