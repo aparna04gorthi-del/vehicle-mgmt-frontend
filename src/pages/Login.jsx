@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:8000';
+const API = 'https://fleetss-backend-d0bxf9dyfadtc8hu.centralindia-01.azurewebsites.net';
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState('');

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:8000';
+const API = 'https://fleetss-backend-d0bxf9dyfadtc8hu.centralindia-01.azurewebsites.net';
 
 function expiryStatus(dateStr) {
   if (!dateStr) return { label: '—', color: '#48484E', bg: 'rgba(72,72,78,0.12)' };

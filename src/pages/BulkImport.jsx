@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as XLSX from 'xlsx';
 import axios from 'axios';
 
-const API = 'http://localhost:8000';
+const API = 'https://fleetss-backend-d0bxf9dyfadtc8hu.centralindia-01.azurewebsites.net';
 
 export default function BulkImport() {
   const [vehicleFile, setVehicleFile] = useState(null);
