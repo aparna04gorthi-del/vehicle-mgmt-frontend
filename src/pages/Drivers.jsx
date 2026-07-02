@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API = 'https://fleetss-backend-d0bxf9dyfadtc8hu.centralindia-01.azurewebsites.net';
+const API = 'http://Fleetms-backend-env.eba-upngx6a2.us-east-1.elasticbeanstalk.com';
 
 export default function Drivers() {
   const [drivers, setDrivers] = useState([]);
